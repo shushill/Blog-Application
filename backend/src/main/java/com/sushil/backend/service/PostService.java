@@ -1,6 +1,6 @@
-package com.springboot.blog.service;
+package com.sushil.backend.service;
 
-import com.springboot.blog.payload.PostDto;
+import com.sushil.backend.payload.PostDto;
 import com.sushil.backend.payload.PostResponse;
 
 import java.util.List;

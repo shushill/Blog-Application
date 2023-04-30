@@ -1,5 +1,6 @@
 package com.sushil.backend.service.impl;
 
+import org.modelmapper.ModelMapper;
 import com.sushil.backend.entity.Comment;
 import com.sushil.backend.entity.Post;
 import com.sushil.backend.exception.BlogAPIException;
@@ -8,7 +9,10 @@ import com.sushil.backend.payload.CommentDto;
 import com.sushil.backend.repository.CommentRepository;
 import com.sushil.backend.repository.PostRepository;
 import com.sushil.backend.service.CommentService;
-import org.modelmapper.ModelMapper;
+import com.sushil.backend.utils.ModelMapperConfig;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +24,16 @@ public class CommentServiceImpl implements CommentService {
 
     private CommentRepository commentRepository;
     private PostRepository postRepository;
-    private ModelMapper mapper;
-    public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository, ModelMapper mapper) {
+    private ModelMapperConfig mapper;
+
+
+
+    public CommentServiceImpl(CommentRepository commentRepository, PostRepository postRepository, ModelMapperConfig mapper) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
         this.mapper = mapper;
     }
+
 
     @Override
     public CommentDto createComment(long postId, CommentDto commentDto) {
@@ -111,23 +119,25 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private CommentDto mapToDTO(Comment comment){
-        CommentDto commentDto = mapper.map(comment, CommentDto.class);
+        // CommentDto commentDto = mapper.map(comment, CommentDto.class);
 
-//        CommentDto commentDto = new CommentDto();
-//        commentDto.setId(comment.getId());
-//        commentDto.setName(comment.getName());
-//        commentDto.setEmail(comment.getEmail());
-//        commentDto.setBody(comment.getBody());
+       CommentDto commentDto = new CommentDto();
+       commentDto.setId(comment.getId());
+       commentDto.setName(comment.getName());
+       commentDto.setEmail(comment.getEmail());
+       commentDto.setBody(comment.getBody());
         return  commentDto;
     }
 
     private Comment mapToEntity(CommentDto commentDto){
-        Comment comment = mapper.map(commentDto, Comment.class);
-//        Comment comment = new Comment();
-//        comment.setId(commentDto.getId());
-//        comment.setName(commentDto.getName());
-//        comment.setEmail(commentDto.getEmail());
-//        comment.setBody(commentDto.getBody());
+        // Comment comment = mapper.map(commentDto, Comment.class);
+       Comment comment = new Comment();
+       comment.setId(commentDto.getId());
+       comment.setName(commentDto.getName());
+       comment.setEmail(commentDto.getEmail());
+       comment.setBody(commentDto.getBody());
         return  comment;
     }
 }
+
+
