@@ -3,6 +3,7 @@ version: '3'
 
 services:
   backend:
+    # image: springboot:latest
     build: 
       context: .
       dockerfile: backend/Dockerfile
@@ -10,6 +11,8 @@ services:
       - "8080:8080"
     depends_on:
       - mypostgres
+    # volumes:
+    #   - ".:/app:rw"
     networks:
       spring-postgres:
     environment:
@@ -29,12 +32,13 @@ services:
      - POSTGRES_USER=postgres
      - POSTGRES_DB=mydb
     volumes:
-    - db-data:/var/lib/postgresql/data
+     - db-data:/var/lib/postgresql/data
     networks:
       spring-postgres:
 
 
 volumes:
   db-data:
+  backend-data:
 networks:
   spring-postgres:

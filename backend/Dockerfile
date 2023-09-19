@@ -1,7 +1,6 @@
 FROM eclipse-temurin:17-jdk-focal
 
 
-
 COPY . .
 
 WORKDIR /backend
